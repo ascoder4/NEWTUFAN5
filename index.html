@@ -659,6 +659,14 @@
             height: 19px;
         }
 
+        /* --- ADDED: Disabled Button Styling for anchor tags --- */
+        .btn[disabled="true"] {
+            pointer-events: none;
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(100%);
+        }
+
         .disclaimer {
             font-size: 9px;
             color: #8888aa;
@@ -798,18 +806,20 @@
                     Free</span>
             </div>
 
-            <!-- Cloudflare Turnstile Widget -->
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAFMInvKmHFg3rkvn"></div>
+            <!-- Cloudflare Turnstile Widget (ADDED data-callback) -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAFMInvKmHFg3rkvn" data-callback="enableButton"></div>
 
             <div class="buttons">
-                <a href="https://t.me/+Vg3x659j3v1kMmE1" class="btn btn-pink" target="_blank" rel="noopener">
+                <!-- ADDED disabled="true" -->
+                <a href="https://t.me/+Vg3x659j3v1kMmE1" class="btn btn-pink" target="_blank" rel="noopener" disabled="true">
                     <svg viewBox="0 0 24 24" fill="#ffffff">
                         <path
                             d="M21.94 4.63c.27-1.13-.87-2.03-1.9-1.57L2.72 10.6c-1.1.49-1.09 2.06.02 2.53l4.5 1.9 1.7 5.48c.24.77 1.22 1 1.8.42l2.53-2.5 4.6 3.4c.83.62 2.02.18 2.25-.83L21.94 4.63zM8.8 13.7l9.4-6.34c.28-.19.58.17.34.4l-7.9 7.4c-.28.26-.46.61-.5.99l-.24 2.16-1.1-4.61z" />
                     </svg>
                     𝑱𝒐𝒊𝒏 𝑻𝒆𝒍𝒆𝒈𝒓𝒂𝒎 𝑵𝒐𝒘
                 </a>
-                <a href="https://t.me/+Vg3x659j3v1kMmE1" class="btn btn-gold" target="_blank" rel="noopener">
+                <!-- ADDED disabled="true" -->
+                <a href="https://t.me/+Vg3x659j3v1kMmE1" class="btn btn-gold" target="_blank" rel="noopener" disabled="true">
                     <svg viewBox="0 0 24 24" fill="#0a0a14">
                         <path
                             d="M21.94 4.63c.27-1.13-.87-2.03-1.9-1.57L2.72 10.6c-1.1.49-1.09 2.06.02 2.53l4.5 1.9 1.7 5.48c.24.77 1.22 1 1.8.42l2.53-2.5 4.6 3.4c.83.62 2.02.18 2.25-.83L21.94 4.63zM8.8 13.7l9.4-6.34c.28-.19.58.17.34.4l-7.9 7.4c-.28.26-.46.61-.5.99l-.24 2.16-1.1-4.61z" />
@@ -825,6 +835,14 @@
     </div>
 
     <script>
+        // --- ADDED: Turnstile Callback Function ---
+        function enableButton(token) {
+            const buttons = document.querySelectorAll('.buttons .btn');
+            buttons.forEach(btn => {
+                btn.setAttribute('disabled', 'false');
+            });
+        }
+
         (function () {
             let seconds = 15;
             const totalSeconds = 5;
